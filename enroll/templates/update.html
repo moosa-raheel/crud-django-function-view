@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block content %}
+<form method="POST">
+  {% csrf_token %} {% for field in form%} {% if not forloop.counter == 5 %}
+  <label class="leading-7 text-lg text-gray-600">{{ field.label }}</label>
+  {{ field }} {% endif %} {% endfor %}
+  <button
+    type="submit"
+    class="bg-yellow-500 py-2 px-5 rounded-lg text-white font-bold"
+  >
+    Update
+  </button>
+</form>
+{% endblock content %}

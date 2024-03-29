@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="{% static "js/tailwind/tailwind.js" %}" ></script>
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <title>{% block title %}CRUD - Project{% endblock title %}</title>
+  </head>
+  <body>
+    <div class="container mb-5">
+      <h1
+        class="text-6xl text-center font-bold text-red-800 bg-red-200 py-5 rounded-lg my-5"
+      >
+        Function Base View C.R.U.D
+      </h1>
+    {% block content %}{% endblock content %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+{% extends "base.html" %} {% block content %}
+
+  <div class="forms flex gap-8">
+    <div class="add w-[40%]">
+      <h2
+        class="text-4xl font-medium text-center bg-blue-200 py-5 rounded-lg my-5 text-blue-900"
+      >
+        Add Student
+      </h2>
+      <form method="POST">
+        {% csrf_token %} {% for field in form %}
+        <label class="leading-7 text-lg text-gray-600">{{ field.label }}</label>
+        {{ field }} {% endfor %}
+        <button
+          type="submit"
+          class="bg-yellow-500 py-2 px-5 rounded-lg text-white font-bold"
+        >
+          Add
+        </button>
+      </form>
+    </div>
+    <div class="show w-[60%]">
+      <h2
+        class="text-4xl font-medium text-center bg-blue-200 py-5 rounded-lg my-5 text-blue-900"
+      >
+        Update or Delete
+      </h2>
+      {% if data %}
+      <table class="table-auto w-full">
+        <thead>
+          <tr align="center">
+            <th>Roll no</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in data %}
+          <tr align="center" class="my-5">
+            <td>{{ i.roll_num }}</td>
+            <td>{{ i.name }}</td>
+            <td>{{ i.email }}</td>
+            <td>{{ i.password }}</td>
+            <td>
+              <form action="{% url "update" i.id %}" method="GET" class="inline">
+                {% csrf_token %}
+              <button class="bg-green-500 p-1 text-white font-bold rounded-md">
+                Update
+              </button>
+            </form>
+              <form action="{% url "delete" i.id %}" method="POST" class="inline">
+                {% csrf_token %}
+              <button class="bg-red-500 p-1 text-white font-bold rounded-md">
+                Delete
+              </button>
+            </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <h1 class="text-center text-2xl">No Data Found</h1>
+      {% endif %}
+    </div>
+  </div>
+{% endblock content %}
